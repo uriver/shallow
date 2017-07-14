@@ -11,9 +11,9 @@
 				<div class="header-item">
 					<ul>
 						<li><router-link to="/blog"><span>主页</span></router-link></li>
-						<li><router-link to="/"><span>分类</span></router-link></li>
-						<li><router-link to="/"><span>时间轴</span></router-link></li>
-						<li><router-link to="/"><span>关于</span></router-link></li>
+						<li><router-link to="/category"><span>分类</span></router-link></li>
+						<li><router-link to="/timeaxis"><span>时间轴</span></router-link></li>
+						<li><router-link to="/about"><span>关于</span></router-link></li>
 					</ul>
 				</div>
 			</div>
