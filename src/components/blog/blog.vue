@@ -11,7 +11,7 @@
 				<li v-for="item in articles">
 					<h1>{{item.title}}</h1>
 					<div class="blogs-mes">发表于 {{item.time}} | 分类于 {{item.category}}</div>
-					<div class="blogs-intro">{{item.intro}}</div>
+					<div class="blogs-description">{{item.description}}</div>
 					<button class="blogs-button">阅读全文 >></button>
 				</li>
 			</ul>
@@ -25,11 +25,26 @@
 			return{
 				motto:'笨蛋自以为聪明，聪明人才知道自己是笨蛋。  ——莎士比亚',
 				articles:[
-						{ "title":"Vue生命周期","time":"2017-7-5","category":"框架","intro":"在Vue的学习过程中，遇到了很多由于不理解生命周期而引起的问题。这次对生命周期做了一个比较系统的学习。"	},
-						{ "title":"JS的多态和继承","time":"2017-7-10","category":"JS","intro":"多态和继承是面向对象语言的重要的特征。"	},
-						{ "title":"Express学习","time":"2017-7-12","category":"框架","intro":"学习nodejs的框架express，加深对node的理解。"	},
-						{ "title":"面向过程和面向对象","time":"2017-7-14","category":"其他","intro":"复习面向过程和面向对象，加深对它们的理解，测试在Vue的学习过程中，遇到了很多由于不理解生命周期而引起的问题。多态和继承是面向对象语言的重要的特征。"	},
+						{ "title":"Vue生命周期","time":"2017-7-5","category":"框架","description":"在Vue的学习过程中，遇到了很多由于不理解生命周期而引起的问题。这次对生命周期做了一个比较系统的学习。"	},
+						{ "title":"JS的多态和继承","time":"2017-7-10","category":"JS","description":"多态和继承是面向对象语言的重要的特征。"	},
+						{ "title":"Express学习","time":"2017-7-12","category":"框架","description":"学习nodejs的框架express，加深对node的理解。"	},
+						{ "title":"面向过程和面向对象","time":"2017-7-14","category":"其他","description":"复习面向过程和面向对象，加深对它们的理解，测试在Vue的学习过程中，遇到了很多由于不理解生命周期而引起的问题。多态和继承是面向对象语言的重要的特征。"	},
 					]
+			}
+		},
+		mounted(){
+			this.getArticle();
+		},
+		methods:{
+			getArticle:function(){
+				let that = this;
+				this.axios({
+					url:'http://127.0.0.1:3000/users/get-article',
+					dataType:'json',
+					method: 'get',
+				}).then((res)=> {
+					that.articles = res.data;
+				})
 			}
 		}
 	}
@@ -77,7 +92,7 @@
 		font-size: 15px;
 		color: #999;
 	}
-	.blogs-intro{
+	.blogs-description{
 		margin-top: 20px;
 		font-size: 16px;
 		color: #555;
