@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import axios from 'axios'
 import router from './router'
+import '../static/css/markdown.css'
 
 Vue.prototype.axios = axios;
 Vue.config.productionTip = false
