@@ -6,6 +6,13 @@
 			</div>
 			<span>{{motto}}</span>
 		</div>
+		<div>
+			<h2>github：</h2>
+			<p>前端：https://github.com/Shallownight/shallow</p>
+			<p>后端：https://github.com/Shallownight/shallow-server</p>
+			<h2>邮箱：</h2>
+			<p>921130605@qq.com</p>
+		</div>
 	</div>
 </template>
 

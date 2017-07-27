@@ -8,26 +8,17 @@
 		</div>
 		<div class="showCate" v-show="chosed">
 			<ul>
-				<li><span @click="showTitle">JavaScript</span> (5)</li>
-				<li><span>Node.js</span> (3)</li>
-				<li><span>HTML&CSS</span> (4)</li>
-				<li><span>随笔</span> (2)</li>
-				<li><span>前端工具</span> (1)</li>
-				<li><span>JavaScript</span> (3)</li>
-				<li><span>其他</span> (7)</li>
+				<li v-for="item in allCate"><span @click="showTitle(item)">{{item.cateName}}</span> ({{item.articleNum}})</li>
 			</ul>
 		</div>
 		<transition name="fade">
 		<div class="showCate2" v-if="!chosed">
-			<span class="nowCate">当前分类：</span><span class="chosedClass">JavaScript</span>
+			<span class="nowCate">当前分类：</span><span class="chosedClass">{{myCate}}</span>
 		</div>
 		</transition>
 		<div class="showTitle">
 			<ul>
-				<li><span class="timeSet">2017-7-20 15:30:57</span> Vue生命周期简介</li>
-				<li><span class="timeSet">2017-7-20 15:30:57</span> 异步与回调</li>
-				<li><span class="timeSet">2017-7-20 15:30:57</span> 我的第一篇博客</li>
-				<li><span class="timeSet">2017-7-20 15:30:57</span> 面向对象和面向过程</li>
+				<li v-for="item in titles"><span class="timeSet">{{item.time}}</span><router-link :to="{path:'/article',query:{id:item.inquire}}">{{item.title}}</router-link></li>
 			</ul>
 		</div>
 	</div>
@@ -39,11 +30,37 @@
 			return {
 				motto:"永远不要试图和生气中的女人讲道理。 ——Shallow",
 				chosed:true,
+				myCate:'',
+				allCate:[{"cateName":"JavaScript","articleNum":15},{"cateName":"Node","articleNum":5}],
+				titles:[{"title":"Vue生命周期简介","time":"2017-7-20"},{"title":"异步与回调","time":"2017-7-20"}]
 			}
 		},
+		mounted(){
+			this.getCategory();
+			this.getTitleByCategory(0,1);
+		},
 		methods:{
-			showTitle:function(){
+			showTitle:function(item){
+				this.myCate = item.cateName;
 				this.chosed = !this.chosed;
+				this.getTitleByCategory(item.cateID,1);
+			},
+			getCategory:function(){
+				this.axios({
+					url:'http://127.0.0.1:3000/users/get-categoryMes',
+					method: 'get',
+				}).then((res)=> {
+					this.allCate = res.data;
+				})
+			},
+			getTitleByCategory:function(id,page){
+				this.axios({
+					url:'http://127.0.0.1:3000/users/get-article-by-title',
+					params:{"cateId":id,"page":page},
+					method: 'get',
+				}).then((res)=> {
+					this.titles = res.data;
+				})
 			}
 		}
 	}
@@ -118,7 +135,8 @@
 	.timeSet{
 		color:grey;
 		font-size: 16px;
-		margin-right: 40px;
 		letter-spacing: 1px;
+		width: 220px;
+		display: inline-block;
 	}
 </style>

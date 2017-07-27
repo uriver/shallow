@@ -6,6 +6,9 @@
 			</div>
 			<span>{{motto}}</span>
 		</div>
+		<div class="getPosition">
+			<div class="building">开发中</div>
+		</div>
 	</div>
 </template>
 
@@ -33,5 +36,19 @@
 	.timeaxis-img{
 		width: 300px;
 		margin-left: 100px;
+	}
+	.getPosition{
+		width: 1000px;
+		margin: 50px auto;
+		overflow: hidden;
+		text-align: center
+	}
+	.building{
+		margin: 100px auto;
+		width: 300px;
+		height: 40px;
+		font-size:24px;
+		border: 1px solid #e6e6e6;
+		padding: 20px;
 	}
 </style>
