@@ -18,8 +18,17 @@
 		</transition>
 		<div class="showTitle">
 			<ul>
-				<li v-for="item in titles"><span class="timeSet">{{item.time}}</span><router-link :to="{path:'/article',query:{id:item.inquire}}">{{item.title}}</router-link></li>
+				<li v-for="item in showItems"><span class="timeSet">{{item.time}}</span><router-link :to="{path:'/article',query:{id:item.inquire}}">{{item.title}}</router-link></li>
 			</ul>
+		</div>
+
+		<div class="change-container">
+			<div class="changePage">
+				<div class="inline" @click="lastPage"><img src="../../assets/back.svg" width="60px" height="30px;"></div>
+				<div class="getPosition"></div>
+				<div class="showPage">{{nowPage}} / {{pages}}</div>
+				<div class="inline" @click="nextPage"><img src="../../assets/next.svg" width="60px" height="30px;"></div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -31,8 +40,12 @@
 				motto:"永远不要试图和生气中的女人讲道理。 ——Shallow",
 				chosed:true,
 				myCate:'',
+				nowPage:1,
+				pages:1,
+				articleNum:0,
 				allCate:[{"cateName":"JavaScript","articleNum":15},{"cateName":"Node","articleNum":5}],
-				titles:[{"title":"Vue生命周期简介","time":"2017-7-20"},{"title":"异步与回调","time":"2017-7-20"}]
+				titles:[{"title":"Vue生命周期简介","time":"2017-7-20"},{"title":"异步与回调","time":"2017-7-20"}],
+				showItems:[],
 			}
 		},
 		mounted(){
@@ -43,6 +56,7 @@
 			showTitle:function(item){
 				this.myCate = item.cateName;
 				this.chosed = !this.chosed;
+				this.nowPage = 1;
 				this.getTitleByCategory(item.cateID,1);
 			},
 			getCategory:function(){
@@ -56,11 +70,37 @@
 			getTitleByCategory:function(id,page){
 				this.axios({
 					url:'http://127.0.0.1:3000/users/get-article-by-title',
-					params:{"cateId":id,"page":page},
+					params:{"cateId":id},
 					method: 'get',
 				}).then((res)=> {
 					this.titles = res.data;
+					this.articleNum = res.data.length;
+					this.pages = Math.ceil(res.data.length / 8 );
+					this.showData();
 				})
+			},
+			showData:function(){
+				let page = this.nowPage;
+				let startNum = page*8 - 8;
+				let endNum = startNum + 8;
+				if(endNum > this.articleNum){
+					endNum = this.articleNum;
+				}
+				this.showItems = this.titles.slice(startNum,endNum);
+			},
+			lastPage:function(){
+				if(this.nowPage == 1){
+					return;
+				}
+				this.nowPage --;
+				this.showData();
+			},
+			nextPage:function(){
+				if(this.nowPage == this.pages){
+					return;
+				}
+				this.nowPage ++;
+				this.showData();
 			}
 		}
 	}
@@ -119,6 +159,7 @@
 	.showTitle{
 		margin: 50px auto;
 		width: 1000px;
+		height: 450px;
 	}
 	.showTitle ul{
 		margin: 0;
@@ -138,5 +179,28 @@
 		letter-spacing: 1px;
 		width: 220px;
 		display: inline-block;
+	}
+	.change-container{
+		width: 1200px;
+		height: 40px;
+	}
+	.changePage{
+		width: 230px;
+		height: 40px;
+		margin: 20px auto;
+		position: relative;
+	}
+	.showPage{
+		position: absolute;
+		top:0;
+		left: 70px;
+	}
+	.inline{
+		display:inline-block;
+		cursor: pointer;
+	}
+	.getPosition{
+		width:50px;
+		display:inline-block;
 	}
 </style>
