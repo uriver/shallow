@@ -32,7 +32,7 @@
 	export default{
 		data(){
 			return{
-				motto:'笨蛋自以为聪明，聪明人才知道自己是笨蛋。  ——莎士比亚',
+				motto:'天行健，君子以自强不息。  ——《周易》',
 				articles:[
 						{ "title":"Vue生命周期","time":"2017-7-5","category":"框架","description":"在Vue的学习过程中，遇到了很多由于不理解生命周期而引起的问题。这次对生命周期做了一个比较系统的学习。"	}
 					],
