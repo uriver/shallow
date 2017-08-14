@@ -25,3 +25,22 @@ export default new Router({
     }
   ]
 })
+
+
+//以下代码是路由懒加载代码，由于项目太小，不需要懒加载，所以注释掉了，另外，使用懒加载的时候要把最上面的Blog及以下import注释掉
+// export default new Router({
+//   routes: [
+//     {
+//       path: '/',
+//       name: 'Home',
+//       component: Home,
+//       children:[
+//         { path: '/blog', component:resolve =>require(['@/components/blog/blog'],resolve) ,name:'主页'},
+//         { path: '/article', component:resolve =>require(['@/components/blog/article'],resolve) ,name:'文章'},
+//         { path: '/category', component:resolve =>require(['@/components/category/category'],resolve) ,name:'分类'},
+//         { path: '/about', component:resolve =>require(['@/components/about/about'],resolve),name:'关于'},
+//         { path: '/timeaxis', component:resolve =>require(['@/components/time/timeaxis'],resolve),name:'时间轴'}
+//       ]
+//     }
+//   ]
+// })
