@@ -19,6 +19,7 @@ html body{
 }
 a{
 	text-decoration: none;
+  outline: none;
 	color:black;
 }
 html{

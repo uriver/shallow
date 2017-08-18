@@ -6,10 +6,10 @@
 			</div>
 			<span>{{motto}}</span>
 		</div>
-		<div>
+		<div class="content">
 			<h2>github：</h2>
 			<p>前端：https://github.com/Shallownight/shallow</p>
-			<p>后端：https://github.com/Shallownight/shallow-server</p>
+			<p>后端（包括后端管理）：https://github.com/Shallownight/shallow-server</p>
 			<h2>邮箱：</h2>
 			<p>921130605@qq.com</p>
 		</div>
@@ -40,5 +40,10 @@
 	.about-img{
 		width: 300px;
 		margin-left: 100px;
+	}
+	.content{
+		width: 900px;
+		margin:100px auto;
+		text-align: center;
 	}
 </style>

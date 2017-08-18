@@ -51,7 +51,7 @@
 			getArticle:function(){
 				let that = this;
 				this.axios({
-					url:'http://127.0.0.1/users/get-article',
+					url:'http://shallownight.com:3000/users/get-article',
 					dataType:'json',
 					method: 'get',
 				}).then((res)=> {
@@ -67,7 +67,7 @@
 				let that = this;
 				window.addEventListener('scroll',function(){
 					let SHeight = document.body.scrollHeight;
-					let STop = document.documentElement.scrollTop;
+					let STop = document.documentElement.scrollTop || document.body.scrollTop;
 					let CHeight = document.documentElement.clientHeight;
 					let Slen = that.showArticles.length;
 					let Alen = that.articles.length;
